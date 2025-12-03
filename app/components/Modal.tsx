@@ -1,4 +1,7 @@
-type ModalData = {
+// app/components/Modal.tsx
+
+export type ModalData = {
+  id: string;
   title: string;
   desc: string;
   details: string[];
@@ -9,7 +12,7 @@ type ModalProps = {
   close: () => void;
 };
 
-export default function Modal({ data, close }: ModalProps) {
+const Modal = ({ data, close }: ModalProps) => {
   const whatsapp =
     "https://wa.me/905555555555?text=Kognita%20programı%20hakkında%20bilgi%20almak%20istiyorum.";
 
@@ -31,4 +34,6 @@ export default function Modal({ data, close }: ModalProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Modal;
