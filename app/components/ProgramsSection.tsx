@@ -1,10 +1,11 @@
 "use client";
-import { programs } from "../data/programs";
+
 import { useState } from "react";
-import Modal from "./Modal";
+import { programs } from "../data/programs";
+import Modal, { ModalData } from "./Modal";
 
 export default function ProgramsSection() {
-  const [modal, setModal] = useState(null);
+  const [modal, setModal] = useState<ModalData | null>(null);
 
   return (
     <>
@@ -13,7 +14,11 @@ export default function ProgramsSection() {
 
         <div className="program-grid">
           {programs.map((p) => (
-            <div key={p.id} className="program-card" onClick={() => setModal(p)}>
+            <div
+              key={p.id}
+              className="program-card"
+              onClick={() => setModal(p)}
+            >
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
               <ul>
