@@ -1,4 +1,3 @@
-"use client";
 import type { Metadata } from "next";
 import { BLOG_POSTS_DATA } from "../../data/blogData";
 import { notFound } from "next/navigation";
@@ -97,46 +96,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                     </div>
                 </div>
             </section>
-
-            {/* CUSTOM CSS FOR BLOG CONTENT */}
-            <style jsx global>{`
-        .blog-content h2 {
-          color: var(--white);
-          font-size: 1.8rem;
-          margin-top: 40px;
-          margin-bottom: 20px;
-        }
-        .blog-content h3 {
-          color: var(--lilac);
-          font-size: 1.4rem;
-          margin-top: 30px;
-          margin-bottom: 16px;
-        }
-        .blog-content p {
-          margin-bottom: 20px;
-        }
-        .blog-content ul {
-          margin-bottom: 24px;
-          padding-left: 24px;
-        }
-        .blog-content li {
-          margin-bottom: 8px;
-        }
-        .blog-content strong {
-          color: var(--white);
-        }
-        .blog-content blockquote {
-          border-left: 4px solid var(--soft-yellow);
-          padding-left: 20px;
-          margin: 40px 0;
-          font-style: italic;
-          color: var(--white);
-          font-size: 1.2rem;
-          background: rgba(253,253,150,0.1);
-          padding: 20px;
-          border-radius: 8px;
-        }
-      `}</style>
 
             <footer>
                 <div className="container">
