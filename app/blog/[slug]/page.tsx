@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    const post = BLOG_POSTS_DATA[params.slug];
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const post = BLOG_POSTS_DATA[slug];
     if (!post) return { title: "Yazı Bulunamadı" };
 
     return {
@@ -15,8 +16,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-    const post = BLOG_POSTS_DATA[params.slug];
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const post = BLOG_POSTS_DATA[slug];
     const whatsappUrl = "https://wa.me/905555555555?text=Merhaba%2C%20blog%20yaz%C4%B1n%C4%B1z%C4%B1%20okudum%20ve%20dan%C4%B1%C5%9Fmak%20istiyorum.";
 
     if (!post) {
