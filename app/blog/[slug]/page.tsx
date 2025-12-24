@@ -1,3 +1,4 @@
+"use client";
 import type { Metadata } from "next";
 import { BLOG_POSTS_DATA } from "../../data/blogData";
 import { notFound } from "next/navigation";
