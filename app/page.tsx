@@ -1,114 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-
-type Program = {
-  id: string;
-  title: string;
-  badge: string;
-  level: string;
-  subtitle: string;
-  bullets: string[];
-  audience: string;
-  outcome: string;
-  testimonial: string;
-};
-
-const PROGRAMS: Program[] = [
-  {
-    id: "yks",
-    title: "YKS Derece Koçluğu",
-    badge: "⭐ Premium Paket",
-    level: "11–12. sınıf & mezun",
-    subtitle: "Derece hedefleyen öğrenciler için yoğun koçluk programı.",
-    bullets: [
-      "Haftalık deneme analizi ve soru hedefleri",
-      "Kişiye özel konu önceliklendirme",
-      "Haftalık bire bir mentor görüşmesi",
-    ],
-    audience: "Sayısal, sözel, eşit ağırlık fark etmeksizin YKS hazırlığındaki öğrenciler.",
-    outcome:
-      "Düzenli takip ile netlerini stabil şekilde yukarı çekmeyi ve motivasyonunu kaybetmemeyi sağlar.",
-    testimonial: "“Denemelerdeki dalgalanma tamamen bitti, artık tam olarak ne yapacağımı biliyorum.”",
-  },
-  {
-    id: "lgs",
-    title: "LGS Yüksek Başarı Programı",
-    badge: "🎯 Yoğun Hazırlık",
-    level: "7–8. sınıf öğrencileri",
-    subtitle: "Temeli sağlamlaştıran, stres yönetimini öğreten LGS hazırlık programı.",
-    bullets: [
-      "Eksik konu analizi ve hedefli çalışmalar",
-      "Haftalık soru çözüm seansları",
-      "Veli ile düzenli iletişim",
-    ],
-    audience: "LGS’de iyi bir Anadolu / proje okulu hedefleyen 7–8. sınıf öğrencileri.",
-    outcome:
-      "Öğrencinin konu eksiği kalmamasını ve denemelerde ne yapacağını bilerek sınava girmesini sağlar.",
-    testimonial:
-      "“Çocuğum hem ders anlamında hem de psikolojik olarak çok daha rahat, ne yapacağını biliyor.”",
-  },
-  {
-    id: "uni",
-    title: "Üniversite Vize/Final Desteği",
-    badge: "📘 Akademik Destek",
-    level: "Lisans & önlisans",
-    subtitle: "Geçme odaklı, ders bazlı vize-final çalışma programı.",
-    bullets: [
-      "Ders başına çalışma planı",
-      "Tekrar programı ve soru havuzu",
-      "İlerleme takibi ve sınav öncesi hızlandırma",
-    ],
-    audience:
-      "Vize/final döneminde ders yükü fazla olan, “sadece geçmek değil, sağlam öğrenmek istiyorum” diyen öğrenciler.",
-    outcome:
-      "Sadece sınavı geçmek değil, dönem sonunda ders içeriğini gerçekten anlayarak kapanışı hedefler.",
-    testimonial:
-      "“Son haftaya kaldığım dersleri bile planlayıp rahatça geçtim, artık dönem sonu kabus olmuyor.”",
-  },
-  {
-    id: "kariyer",
-    title: "Kariyer Mentorluğu",
-    badge: "🚀 Gelecek Odaklı",
-    level: "Lise & üniversite",
-    subtitle: "Bölüm seçimi, kariyer planlama ve yol haritası mentorluk programı.",
-    bullets: [
-      "Bölüm ve meslek analizi",
-      "Yurt içi / yurt dışı seçenekleri",
-      "Uzun vadeli hedef planlama",
-    ],
-    audience:
-      "“Hangi bölümü okuyacağım, nasıl bir kariyer istiyorum?” sorusuna net cevap arayan öğrenciler.",
-    outcome:
-      "Öğrencinin güçlü yönlerine uygun, gerçekçi ve heyecan verici bir kariyer rotası oluşturulur.",
-    testimonial:
-      "“Kafamdaki belirsizlik bitti, artık ne istediğimi ve oraya nasıl gideceğimi biliyorum.”",
-  },
-];
-
-const SSS = [
-  {
-    q: "Koçluk sistemi nasıl işliyor?",
-    a: "Öğrencinin seviyesine göre analiz yapılır, ardından kişisel plan oluşturulur ve koç haftalık takip yapar.",
-  },
-  {
-    q: "Ücretler nedir?",
-    a: "Programa ve sınıf seviyesine göre değişiyor. WhatsApp üzerinden hızlıca net fiyat bilgisi veriyoruz.",
-  },
-  {
-    q: "Üniversite programı gerçekten geçme garantili mi?",
-    a: "Programdaki adımları eksiksiz uygulayan öğrenciler için geçme garantisi sunuyoruz.",
-  },
-];
+import Link from "next/link";
+import { useEffect } from "react";
 
 export default function HomePage() {
-  const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
-
   const whatsappUrl =
     "https://wa.me/905555555555?text=Merhaba%2C%20Kognita%20Akademi%20hakkında%20bilgi%20almak%20istiyorum.";
 
-  // Scroll ile görünme animasyonu
+  // Scroll reveal
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -123,7 +23,7 @@ export default function HomePage() {
           }
         });
       },
-      { threshold: 0.18 }
+      { threshold: 0.15 }
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -132,45 +32,13 @@ export default function HomePage() {
   }, []);
 
   return (
-    <>
-      {/* NAVBAR */}
-      <header className="navbar">
-        <div className="container navbar-inner">
-          <div className="nav-brand">
-            <Image
-              src="/kognita-logo-icon.png"
-              alt="Kognita"
-              width={32}
-              height={32}
-            />
-            <span>Kognita Akademi</span>
-          </div>
-          <nav className="nav-links">
-            <a className="nav-link" href="#neden">
-              Neden Kognita?
-            </a>
-            <a className="nav-link" href="#metod">
-              Metod
-            </a>
-            <a className="nav-link" href="#programlar">
-              Programlar
-            </a>
-            <a className="nav-link" href="#sss">
-              SSS
-            </a>
-            <a className="btn-primary" href={whatsappUrl} target="_blank">
-              WhatsApp’tan Yaz
-            </a>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        {/* HERO */}
-        <section className="hero container" data-reveal>
+    <main>
+      {/* HERO */}
+      <section className="hero" data-reveal>
+        <div className="container">
           <div className="hero-left">
             <p className="hero-kicker">
-              TÜRKİYE DERECELİ ÖĞRENCİLERDEN SINAV KOÇLUĞU
+              🏆 TÜRKİYE DERECELİ EĞİTMENLERDEN SINAV KOÇLUĞU
             </p>
             <h1 className="hero-title">
               Kognita Akademi ile <span>sınav maratonunu yalnız koşma.</span>
@@ -187,14 +55,14 @@ export default function HomePage() {
                 target="_blank"
                 rel="noreferrer"
               >
-                WhatsApp’tan Hemen Yaz
+                📲 WhatsApp'tan Hemen Yaz
               </a>
-              <a href="#programlar" className="btn-secondary">
+              <Link href="/programlar" className="btn-secondary">
                 Programları Gör
-              </a>
+              </Link>
             </div>
             <p className="hero-note">
-              İlk görüşme ve seviye analizi{" "}
+              🎁 İlk görüşme ve seviye analizi{" "}
               <strong>tamamen ücretsizdir.</strong>
             </p>
           </div>
@@ -205,225 +73,134 @@ export default function HomePage() {
               <Image
                 src="/kognita-logo-icon.png"
                 alt="Kognita Akademi"
-                width={220}
-                height={220}
+                width={200}
+                height={200}
                 className="hero-logo-img"
               />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* NEDEN KOGNITA */}
-        <section id="neden" className="section" data-reveal>
-          <div className="container">
+      {/* NEDEN KOGNITA - TEASER */}
+      <section className="section" data-reveal>
+        <div className="container">
+          <div className="section-header">
             <h2 className="section-title">Neden Kognita?</h2>
             <p className="section-subtitle">
               Gençlere hitap eden, ancak kurumsal çizgiden ödün vermeyen modern
               bir sınav koçluğu modelimiz var.
             </p>
-            <div className="grid-3">
-              <div className="info-card">
-                <h3>🎯 Kişiye Özel Planlama</h3>
-                <p>
-                  Her öğrenci için seviye analizi yaparak kişisel çalışma
-                  rotası çıkarıyoruz.
-                </p>
-              </div>
-              <div className="info-card">
-                <h3>🔥 Derece Öğrencilerinden Koçluk</h3>
-                <p>
-                  Mentorlarımız Türkiye derecesi yapmış, sınav psikolojisini
-                  yaşamış öğrencilerden oluşur.
-                </p>
-              </div>
-              <div className="info-card">
-                <h3>🧠 Bilimsel & Takip Odaklı Metod</h3>
-                <p>
-                  Haftalık hedef takibi, ilerleme grafikleri ve düzenli geri
-                  bildirimle süreci kontrol altında tutarız.
-                </p>
-              </div>
+          </div>
+          <div className="grid-3">
+            <div className="info-card">
+              <h3>🎯 Kişiye Özel Planlama</h3>
+              <p>
+                Her öğrenci için seviye analizi yaparak kişisel çalışma
+                rotası çıkarıyoruz.
+              </p>
+            </div>
+            <div className="info-card">
+              <h3>🔥 Derece Öğrencilerinden Koçluk</h3>
+              <p>
+                Mentorlarımız Türkiye derecesi yapmış, sınav psikolojisini
+                yaşamış öğrencilerden oluşur.
+              </p>
+            </div>
+            <div className="info-card">
+              <h3>🧠 Bilimsel & Takip Odaklı Metod</h3>
+              <p>
+                Haftalık hedef takibi, ilerleme grafikleri ve düzenli geri
+                bildirimle süreci kontrol altında tutarız.
+              </p>
             </div>
           </div>
-        </section>
-
-        {/* METOD */}
-        <section id="metod" className="section" data-reveal>
-          <div className="container">
-            <h2 className="section-title">Kognita Metodu</h2>
-            <p className="section-subtitle">
-              Basit ama disiplinli bir 3 adım: analiz, planlama ve takip.
-            </p>
-            <div className="grid-3">
-              <div className="info-card">
-                <h3>1. Derin Analiz</h3>
-                <p>
-                  Ders, deneme ve hedefler üzerinden öğrencinin mevcut durumu
-                  fotoğraflanır.
-                </p>
-              </div>
-              <div className="info-card">
-                <h3>2. Özel Program Tasarımı</h3>
-                <p>
-                  Konu önceliklendirme, soru hedefleri ve kaynak seçimleri
-                  yapılır.
-                </p>
-              </div>
-              <div className="info-card">
-                <h3>3. Haftalık Takip & Geri Bildirim</h3>
-                <p>
-                  Mentor her hafta planın uygulanışını kontrol eder ve gerekirse
-                  revize eder.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* PROGRAMLAR (ÜRÜN KARTLARI) */}
-        <section id="programlar" className="section" data-reveal>
-          <div className="container">
-            <h2 className="section-title">Programlarımız</h2>
-            <p className="section-subtitle">
-              Kognita Akademi, YKS ve LGS’den üniversite vize-final sınavlarına
-              kadar farklı seviyelerde kişiye özel programlar sunar.
-            </p>
-            <div className="grid-2 program-grid">
-              {PROGRAMS.map((p) => (
-                <article
-                  key={p.id}
-                  className="program-card"
-                  onClick={() => setSelectedProgram(p)}
-                >
-                  <div className="program-card-header">
-                    <span className="program-badge">{p.badge}</span>
-                    <h3 className="program-title">{p.title}</h3>
-                    <p className="program-level">{p.level}</p>
-                    <p className="program-card-sub">{p.subtitle}</p>
-                  </div>
-                  <ul className="program-bullets">
-                    {p.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                  <div className="program-card-footer">
-                    <div className="program-meta">
-                      <span>{p.audience}</span>
-                    </div>
-                    <button
-                      type="button"
-                      className="program-mini-cta"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedProgram(p);
-                      }}
-                    >
-                      Detay
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SSS */}
-        <section id="sss" className="section" data-reveal>
-          <div className="container">
-            <h2 className="section-title">Sık Sorulan Sorular</h2>
-            <div>
-              {SSS.map((item) => (
-                <div key={item.q} className="sss-item">
-                  <h3>{item.q}</h3>
-                  <p>{item.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="cta" data-reveal>
-          <div className="container">
-            <h2 className="cta-title">
-              Başarıya giden yol, doğru koçla başlar.
-            </h2>
-            <p className="cta-text">
-              Hedeflerini ve seviyeni birlikte analiz edelim; sana özel bir
-              Kognita planı çıkaralım.
-            </p>
-            <a
-              href={whatsappUrl}
-              className="btn-primary"
-              target="_blank"
-              rel="noreferrer"
-            >
-              WhatsApp’tan Bilgi Al
-            </a>
-          </div>
-        </section>
-
-        {/* FOOTER */}
-        <footer>
-          Kognita Akademi © {new Date().getFullYear()} — Tüm hakları saklıdır.
-        </footer>
-      </main>
-
-      {/* MODAL – ÜRÜN DETAYI */}
-      {selectedProgram && (
-        <div className="modal-backdrop" onClick={() => setSelectedProgram(null)}>
-          <div
-            className="modal-content fade-up modal-program"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="modal-header">
-              <div>
-                <div className="modal-badge">{selectedProgram.badge}</div>
-                <div className="modal-title">{selectedProgram.title}</div>
-                <div className="modal-level">{selectedProgram.level}</div>
-              </div>
-              <button
-                className="modal-close"
-                onClick={() => setSelectedProgram(null)}
-                aria-label="Kapat"
-              >
-                ×
-              </button>
-            </div>
-
-            <p className="modal-sub">{selectedProgram.subtitle}</p>
-
-            <h4 className="modal-section-title">Program içeriği</h4>
-            <ul>
-              {selectedProgram.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-
-            <h4 className="modal-section-title">Kimler için uygun?</h4>
-            <p className="modal-text">{selectedProgram.audience}</p>
-
-            <h4 className="modal-section-title">Bu program ne kazandırır?</h4>
-            <p className="modal-text">{selectedProgram.outcome}</p>
-
-            <div className="modal-testimonial">
-              <span className="modal-quote-symbol">“</span>
-              <p>{selectedProgram.testimonial}</p>
-            </div>
-
-            <div style={{ marginTop: 16, textAlign: "right" }}>
-              <a
-                href={whatsappUrl}
-                className="btn-primary"
-                target="_blank"
-                rel="noreferrer"
-              >
-                WhatsApp’tan Bilgi Al
-              </a>
-            </div>
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <Link href="/hakkimizda" className="btn-secondary">
+              Daha Fazla Bilgi
+            </Link>
           </div>
         </div>
-      )}
-    </>
+      </section>
+
+      {/* PROGRAMLAR - TEASER */}
+      <section className="section" data-reveal>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Programlarımız</h2>
+            <p className="section-subtitle">
+              YKS, LGS ve Üniversite öğrencileri için özel paketlerimiz.
+            </p>
+          </div>
+
+          {/* Quick links to programs instead of full details */}
+          <div className="grid-2">
+            <Link href="/programlar" className="info-card" style={{ textDecoration: "none", cursor: "pointer", textAlign: "center" }}>
+              <h3 style={{ justifyContent: "center" }}>🎓 YKS Koçluğu</h3>
+              <p>Derece hedefleyenler için.</p>
+            </Link>
+            <Link href="/programlar" className="info-card" style={{ textDecoration: "none", cursor: "pointer", textAlign: "center" }}>
+              <h3 style={{ justifyContent: "center" }}>🎯 LGS Hazırlık</h3>
+              <p>Liselere giriş için yoğun program.</p>
+            </Link>
+            <Link href="/programlar" className="info-card" style={{ textDecoration: "none", cursor: "pointer", textAlign: "center" }}>
+              <h3 style={{ justifyContent: "center" }}>📘 Vize / Final</h3>
+              <p>Üniversite derslerinde geçme garantisi.</p>
+            </Link>
+            <Link href="/programlar" className="info-card" style={{ textDecoration: "none", cursor: "pointer", textAlign: "center" }}>
+              <h3 style={{ justifyContent: "center" }}>🚀 Kariyer</h3>
+              <p>Geleceğini şansa bırakma.</p>
+            </Link>
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <Link href="/programlar" className="btn-primary">
+              Tüm Programları İncele
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="cta" data-reveal>
+        <div className="container">
+          <h2 className="cta-title">
+            Başarıya giden yol, doğru koçla başlar.
+          </h2>
+          <p className="cta-text">
+            Hedeflerini ve seviyeni birlikte analiz edelim; sana özel bir
+            Kognita planı çıkaralım.
+          </p>
+          <a
+            href={whatsappUrl}
+            className="btn-primary"
+            target="_blank"
+            rel="noreferrer"
+          >
+            📲 WhatsApp'tan Bilgi Al
+          </a>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer>
+        <div className="container">
+          Kognita Akademi © {new Date().getFullYear()} — Tüm hakları saklıdır.
+        </div>
+      </footer>
+
+      {/* FLOATING WHATSAPP BUTTON */}
+      <a
+        href={whatsappUrl}
+        className="floating-whatsapp"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="WhatsApp ile iletişime geç"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+      </a>
+    </main>
   );
 }
